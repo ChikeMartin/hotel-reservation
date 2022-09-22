@@ -63,4 +63,9 @@ public class Reservation {
                 Objects.equals(r.getRoom(), this.getRoom());
 
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCheckInDate(), getCheckOutDate(), getCustomer(), getRoom());
+    }
 }
