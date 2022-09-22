@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Reservation {
     private Customer customer;
@@ -38,5 +39,28 @@ public class Reservation {
                 "\nRoom: " + room.toString() +
                 "\nCheck-in: " + checkInDate +
                 "\nCheck-out: " + checkOutDate;
+    }
+
+    @Override
+    public boolean equals (Object o){
+        // compare with itself
+        if (this == o) {
+            return true;
+        }
+        // compare if o is an instance
+        if (!(o instanceof Reservation)) {
+            return false;
+        }
+
+        /*
+        Cast o to an instance and
+        compare elements of this to o
+         */
+        Reservation r = (Reservation) o;
+        return Objects.equals(r.getCheckInDate(), this.getCheckInDate()) &&
+                Objects.equals(r.getCheckOutDate(), this.getCheckOutDate()) &&
+                Objects.equals(r.getCustomer(), this.getCustomer()) &&
+                Objects.equals(r.getRoom(), this.getRoom());
+
     }
 }
