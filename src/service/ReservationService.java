@@ -9,11 +9,10 @@ import java.util.*;
 public class ReservationService {
 
     private static ReservationService INSTANCE = new ReservationService();
+    public static ReservationService getInstance() {return INSTANCE;}
 
     private static Map<String, IRoom> rooms = new HashMap<String, IRoom>();
     private static Map<Customer, List<Reservation>> reservations = new HashMap<Customer, List<Reservation>>();
-
-    public static ReservationService getInstance() {return INSTANCE;}
 
     // Getters for databases
     public Map<String, IRoom> getRoomList() {
@@ -83,4 +82,9 @@ public class ReservationService {
             System.out.println(reservation);
         }
     }
+
+    String showLoaderInfo(){
+        return "Fake rooms and customers generated and downloaded from https://generatedata.com/generator";
+    }
+
 }
