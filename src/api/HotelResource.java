@@ -45,23 +45,25 @@ public class HotelResource {
         //Search for alternative rooms
         if (availableRooms.size() == 0) {
             System.out.println("No room found for given dates. Searching for recommended rooms...");
+            Collection<IRoom> recommendedRooms;
             Calendar calendar = Calendar.getInstance();
 
             // add 1 week to checkindate
             calendar.setTime(checkIn);
             calendar.add(Calendar.WEEK_OF_YEAR, 1);
-            checkIn = Date.from(calendar.toInstant());
+            Date newCheckIn = Date.from(calendar.toInstant());
 
             // add 1 week to chekoutdate
             calendar.setTime(checkOut);
             calendar.add(Calendar.WEEK_OF_YEAR, 1);
-            checkOut = Date.from(calendar.toInstant());
+            Date newCheckOut = Date.from(calendar.toInstant());
             // find rooms with new dates
             // update value of available rooms
-            availableRooms = reservationService.findRooms(checkIn, checkOut);
+            recommendedRooms = reservationService.findRooms(newCheckIn, newCheckOut);
             // add a print statement to show that these are recommended rooms
-            if (availableRooms.size() != 0){
-                System.out.println("Showing recommended rooms:");
+            if (recommendedRooms.size() != 0){
+                System.out.println("Showing recommended rooms from: "+ newCheckIn +" to"+ newCheckOut);
+                return recommendedRooms;
             }
         }
         return availableRooms;
